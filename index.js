@@ -9,6 +9,8 @@ import { gamePlatformsHandler } from "./src/services/game-platforms.handlers.js"
 import { userFeedbackHandler } from "./src/services/game-user-feedback.handlers.js";
 import { twitchGameRecomHandler } from "./src/services/twich-game-recommendation.handlers.js";
 import { userBoostsHandler } from "./src/services/user-boosts.handlers.js";
+import { gameUserUnsavedHandler } from "./src/services/game-user-unsaved.handlers.js";
+import { gamePlatformAggHandler } from "./src/services/game-platforms-agg.handlers.js";
 
 const app = express();
 app.use(bodyParser.json());
@@ -45,6 +47,16 @@ app.use(bodyParser.json());
    rpt-user-boosts-flat
    ========================================================= */
  userBoostsHandler(app)
+/* ========================================================= */
+/* =========================================================
+   rpt-igdb-game-user-unsaved-flat
+   ========================================================= */
+ gameUserUnsavedHandler(app)
+/* ========================================================= */
+/* =========================================================
+   rpt-igdb-game-user-platform-agg
+   ========================================================= */
+ gamePlatformAggHandler(app)
 /* ========================================================= */
 
 app.listen(8081, (e) => {

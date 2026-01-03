@@ -5,7 +5,7 @@ export const gamePlatformAggHandler = (app) => {
         const id = req.query.id;
         if (!id) return res.status(400).send("invalid request");
 
-        res.json(await RptIgdbGamePlatformsAgg.findOne({ where: { id } }));
+        res.json(await RptIgdbGamePlatformsAgg.findOne({ where: { igdb_game_id:id } }));
     });
 
     app.get("/GamePlatformsAgg", async (req, res) => {
@@ -23,7 +23,7 @@ export const gamePlatformAggHandler = (app) => {
         const id = req.body.id;
         if (!id) return res.status(400).send("invalid request");
 
-        const item = await RptIgdbGamePlatformsAgg.findOne({ where: { id } });
+        const item = await RptIgdbGamePlatformsAgg.findOne({ where: { igdb_game_id:id } });
         if (!item) return res.status(400).send("invalid request");
 
         await item.update(req.body);
@@ -34,7 +34,7 @@ export const gamePlatformAggHandler = (app) => {
         const id = req.query.id;
         if (!id) return res.status(400).send("invalid request");
 
-        await RptIgdbGamePlatformsAgg.destroy({ where: { id } });
+        await RptIgdbGamePlatformsAgg.destroy({ where: { igdb_game_id:id } });
         res.json({ message: "operation successful" });
     });
 }

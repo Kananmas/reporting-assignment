@@ -1,3 +1,4 @@
+import dbInstance from "../../connection.js";
 import RptUserBoostsFlat from "../models/RptUserBoostsFlat/index.js";
 
 export const userBoostsHandler = (app) => {
@@ -36,5 +37,14 @@ export const userBoostsHandler = (app) => {
 
         await RptUserBoostsFlat.destroy({ where: { id } });
         res.json({ message: "operation successful" });
+    });
+
+
+    app.get("/Boost/aggregations/avg-per-type", async (req, res) => {
+        const result = await RptUserBoostsFlat.findAll({
+            attributes: ["booster_type", [dbInstance.fn("AVG", dbInstance.col("booster_units")), "avg_units"]],
+            group: ["booster_type"]
+        });
+        res.json(result);
     });
 }

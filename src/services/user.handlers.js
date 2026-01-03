@@ -1,3 +1,4 @@
+import dbInstance from "../../connection.js";
 import RptUserFlat from "../models/RptUserFlat/index.js";
 
 export const userHandlers = (app) => {
@@ -37,4 +38,14 @@ export const userHandlers = (app) => {
         await RptUserFlat.destroy({ where: { username } });
         res.json({ message: "operation successful" });
     });
+
+    //aggregation
+    app.get("/User/aggregations/market_alerts", async (req, res) => {
+        const result = await RptUserFlat.findAll({
+            attributes: ["market_alerts", [dbInstance.fn("COUNT", dbInstance.col("username")), "user_count"]],
+            group: ["market_alerts"]
+        });
+        res.json(result);
+    });
+
 }

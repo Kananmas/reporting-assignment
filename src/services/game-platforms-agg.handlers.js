@@ -1,3 +1,40 @@
-export const platformHandler = (app) => {
-    
+import RptIgdbGamePlatformsAgg from "../models/RptIgdbGamePlatformsAgg/index.js";
+
+export const gamePlatformAggHandler = (app) => {
+    app.get("/GamePlatformsAgg/id", async (req, res) => {
+        const id = req.query.id;
+        if (!id) return res.status(400).send("invalid request");
+
+        res.json(await RptIgdbGamePlatformsAgg.findOne({ where: { id } }));
+    });
+
+    app.get("/GamePlatformsAgg", async (req, res) => {
+        res.json(await RptIgdbGamePlatformsAgg.findAll());
+    });
+
+    app.post("/GamePlatformsAgg/new", async (req, res) => {
+        if (!req.body) return res.status(400).send("invalid request");
+
+        await RptIgdbGamePlatformsAgg.create(req.body);
+        res.json({ message: "operation successful" });
+    });
+
+    app.put("/GamePlatformsAgg/update", async (req, res) => {
+        const id = req.body.id;
+        if (!id) return res.status(400).send("invalid request");
+
+        const item = await RptIgdbGamePlatformsAgg.findOne({ where: { id } });
+        if (!item) return res.status(400).send("invalid request");
+
+        await item.update(req.body);
+        res.json({ message: "operation successful" });
+    });
+
+    app.delete("/GamePlatformsAgg/remove", async (req, res) => {
+        const id = req.query.id;
+        if (!id) return res.status(400).send("invalid request");
+
+        await RptIgdbGamePlatformsAgg.destroy({ where: { id } });
+        res.json({ message: "operation successful" });
+    });
 }

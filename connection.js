@@ -10,7 +10,7 @@ const dbInstance =  new Sequelize({
 try {
     await dbInstance.authenticate();
 } catch (error) {
-    console.log(`error : ${error.message}`)
+    console.log(`error : ${error.message ?? error}`)
 }
 
 export default dbInstance;

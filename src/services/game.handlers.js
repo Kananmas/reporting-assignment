@@ -1,0 +1,42 @@
+import RptIgdbGame from "../models/RptIgdbGame/index.js";
+
+export const gameHandler = (app) => {
+
+    app.get("/IGDBGame/id", async (req, res) => {
+        const id = req.query.id;
+        if (!id) return res.status(400).send("invalid request");
+
+        res.json(await RptIgdbGame.findOne({ where: { id } }));
+    });
+
+    app.get("/IGDBGame", async (req, res) => {
+        res.json(await RptIgdbGame.findAll());
+    });
+
+    app.post("/IGDBGame/new", async (req, res) => {
+        if (!req.body) return res.status(400).send("invalid request");
+
+        await RptIgdbGame.create(req.body);
+        res.json({ message: "operation successful" });
+    });
+
+    app.put("/IGDBGame/update", async (req, res) => {
+        const id = req.body.id;
+        if (!id) return res.status(400).send("invalid request");
+
+        const item = await RptIgdbGame.findOne({ where: { id } });
+        if (!item) return res.status(400).send("invalid request");
+
+        await item.update(req.body);
+        res.json({ message: "operation successful" });
+    });
+
+    app.delete("/IGDBGame/remove", async (req, res) => {
+        const id = req.query.id;
+        if (!id) return res.status(400).send("invalid request");
+
+        await RptIgdbGame.destroy({ where: { id } });
+        res.json({ message: "operation successful" });
+    });
+
+}

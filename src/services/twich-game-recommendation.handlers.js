@@ -1,3 +1,4 @@
+import dbInstance from "../../connection.js";
 import RptTwitchGameRecommendationFlat from "../models/RptTwitchGameRecommendationFlat/index.js";
 
 export const twitchGameRecomHandler = (app) => {
@@ -37,4 +38,23 @@ export const twitchGameRecomHandler = (app) => {
         await RptTwitchGameRecommendationFlat.destroy({ where: { id } });
         res.json({ message: "operation successful" });
     });
+
+    //aggregations
+    app.get("/Recommendation/aggregations/count_by_type", async (req, res) => {
+        const result = await RptTwitchGameRecommendationFlat.findAll({
+            attributes: ['recommendation_type', [dbInstance.fn("COUNT",
+                dbInstance.col("id")), 'count_by_type']],
+            group:['recommendation_type']
+        })
+        res.json(result)
+    })
+
+    app.get("/Recommendation/aggregations/count_by_username" , async (req , res) => {
+        const result = await RptTwitchGameRecommendationFlat.findAll({
+            attributes:['username' , dbInstance.fn('COUNT' , dbInstance.col("id")) , "count_by_username"],
+            group:['username']
+        })
+
+        res.json(result)
+    })
 }

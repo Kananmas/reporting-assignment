@@ -1,3 +1,4 @@
+import dbInstance from "../../connection.js";
 import RptUserPreferencesFlat from "../models/RptUserPreferencesFlat/index.js";
 
 export const userPreferencesHandler = (app) => {
@@ -37,4 +38,15 @@ export const userPreferencesHandler = (app) => {
         await RptUserPreferencesFlat.destroy({ where: { id } });
         res.json({ message: "operation successful" });
     });
+
+
+    //aggregations
+    app.get("/UserPreferences/aggregations/count_by_username" , async (req, res) => {
+        const result = await RptUserPreferencesFlat.findAll({
+            attributes:['username' , [dbInstance.fn('COUNT' , dbInstance.col('id')) , 'count_by_username']],
+            group:['username']
+        })
+
+        res.json(result);
+    })
 }

@@ -1,3 +1,4 @@
+import dbInstance from "../../connection.js";
 import RptIgdbGame from "../models/RptIgdbGame/index.js";
 
 export const gameHandler = (app) => {
@@ -39,4 +40,12 @@ export const gameHandler = (app) => {
         res.json({ message: "operation successful" });
     });
 
+    // aggregations
+    app.get("/IGDBGame/aggregations/group_by_genre", async (req, res) => {
+        const result = await RptIgdbGame.findAll({
+            attributes: ["genres", [dbInstance.fn("COUNT", dbInstance.col("id")), "game_count"]],
+            group: ["genres"]
+        });
+        res.json(result);
+    });
 }

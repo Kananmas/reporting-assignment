@@ -39,7 +39,7 @@ export const userBoostsHandler = (app) => {
         res.json({ message: "operation successful" });
     });
 
-
+    // aggregations
     app.get("/Boost/aggregations/avg-per-type", async (req, res) => {
         const result = await RptUserBoostsFlat.findAll({
             attributes: ["booster_type", [dbInstance.fn("AVG", dbInstance.col("booster_units")), "avg_units"]],

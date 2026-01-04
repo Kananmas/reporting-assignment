@@ -1,3 +1,4 @@
+import dbInstance from "../../connection.js";
 import RptStreamingPreference from "../models/RptStreamingPreference/index.js";
 
 export const streamingPrefHandler = (app) => {
@@ -38,4 +39,15 @@ export const streamingPrefHandler = (app) => {
         await RptStreamingPreference.destroy({ where: { id } });
         res.json({ message: "operation successful" });
     });
+
+
+    // aggregations
+    app.get("/StreamingPreference/aggregations/count_by_type", async (req, res) => {
+        const result = await RptStreamingPreference.findAll({
+            attributes: ['preferrence_type',[ dbInstance.fn("COUNT", dbInstance.col('id')), 'preferrence_type']],
+            group:['preferrence_type']
+        })
+
+        res.json(result);
+    })
 }

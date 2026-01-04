@@ -1,5 +1,4 @@
 import dbInstance from "../../connection.js";
-import RptIgdbGamePlatforms from "../models/RptIgdbGamePlatforms/index.js";
 import RptIgdbGamePlatformsAgg from "../models/RptIgdbGamePlatformsAgg/index.js";
 
 export const gamePlatformAggHandler = (app) => {
@@ -43,7 +42,7 @@ export const gamePlatformAggHandler = (app) => {
 
     //aggregations
     app.get("/GamePlatformAgg/arregations/count_by_gameid", async (req, res) => {
-        const result = await RptIgdbGamePlatforms.findAll({
+        const result = await RptIgdbGamePlatformsAgg.findAll({
             attributes: ['igdb_game_id', [dbInstance.fn("COUNT",
                 dbInstance.col("igdb_game_id")), "count_by_gameid"]],
             group: ['igdb_game_id']

@@ -5,7 +5,7 @@ import db from "../../../connection.js";
 const RptUserBoostsFlat = db.define(
   "rpt_user_boosts_flat",
   {
-    id: { type: DataTypes.INTEGER, primaryKey: true },
+    id: { type: DataTypes.INTEGER, primaryKey: true ,  autoIncrement:true },
     username: DataTypes.STRING,
     booster_type: DataTypes.STRING,
     booster_units: DataTypes.DOUBLE,

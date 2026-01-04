@@ -5,7 +5,7 @@ import db from "../../../connection.js";
 const RptTwitchGameRecommendationFlat = db.define(
   "rpt_twitch_game_recommendation_flat",
   {
-    id: { type: DataTypes.INTEGER, primaryKey: true },
+    id: { type: DataTypes.INTEGER, primaryKey: true ,  autoIncrement:true  },
     igdb_game_id: DataTypes.INTEGER,
     username: DataTypes.STRING,
     stat_type: DataTypes.STRING,

@@ -44,7 +44,7 @@ export const streamingPrefHandler = (app) => {
     // aggregations
     app.get("/StreamingPreference/aggregations/count_by_type", async (req, res) => {
         const result = await RptStreamingPreference.findAll({
-            attributes: ['preferrence_type',[ dbInstance.fn("COUNT", dbInstance.col('id')), 'preferrence_type']],
+            attributes: ['preferrence_type',[ dbInstance.fn("COUNT", dbInstance.col('id')), 'count_preference_type']],
             group:['preferrence_type']
         })
 

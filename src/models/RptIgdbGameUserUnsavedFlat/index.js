@@ -5,7 +5,7 @@ import db from "../../../connection.js";
 const RptIgdbGameUserUnsavedFlat = db.define(
   "rpt_igdb_game_user_unsaved_flat",
   {
-    id: { type: DataTypes.INTEGER, primaryKey: true },
+    id: { type: DataTypes.INTEGER, primaryKey: true ,  autoIncrement:true  },
     igdb_game_id: DataTypes.INTEGER,
     username: DataTypes.STRING,
     comment: DataTypes.TEXT,

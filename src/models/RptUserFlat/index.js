@@ -5,7 +5,7 @@ import db from "../../../connection.js";
 const RptUserFlat = db.define(
   "rpt_user_flat",
   {
-    username: { type: DataTypes.STRING, primaryKey: true },
+    username: { type: DataTypes.STRING, primaryKey: true ,  autoIncrement:true },
     user_profile_id: DataTypes.INTEGER,
     last_login: DataTypes.DATE,
     first_name: DataTypes.STRING,

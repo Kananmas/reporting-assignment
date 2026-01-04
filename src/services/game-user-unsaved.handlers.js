@@ -40,7 +40,7 @@ export const gameUserUnsavedHandler = (app) => {
     });
 
     //aggregation
-    app.get("/GameUserUnsaved/aggregation/count_by_username", async (req, res) => {
+    app.get("/GameUserUnsaved/aggregations/count_by_username", async (req, res) => {
         const result = await RptIgdbGameUserUnsavedFlat.findAll({
             attributes: ["username", [dbInstance.fn("COUNT", dbInstance.col("id")), "count_by_user"]],
             group: ["username"]
@@ -48,7 +48,7 @@ export const gameUserUnsavedHandler = (app) => {
         res.json(result);
     })
 
-    app.get("/GameUserUnsaved/aggregation/count_by_gameid", async (req, res) => {
+    app.get("/GameUserUnsaved/aggregations/count_by_gameid", async (req, res) => {
         const result = await RptIgdbGameUserUnsavedFlat.findAll({
             attributes: ["igdb_game_id", [dbInstance.fn("COUNT", dbInstance.col("id")), "count_by_game"]],
             group: ["igdb_game_id"]

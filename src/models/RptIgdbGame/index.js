@@ -4,7 +4,7 @@ import db from "../../../connection.js";
 const RptIgdbGame = db.define(
   "rpt_igdb_game",
   {
-    id: { type: DataTypes.INTEGER, primaryKey: true },
+    id: { type: DataTypes.INTEGER, primaryKey: true , autoIncrement:true },
     cover: DataTypes.TEXT,
     genres: DataTypes.TEXT,
     name: DataTypes.TEXT,

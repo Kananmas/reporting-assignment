@@ -5,7 +5,7 @@ import db from "../../../connection.js";
 const RptUserPreferencesFlat = db.define(
   "rpt_user_preferences_flat",
   {
-    id: { type: DataTypes.INTEGER, primaryKey: true },
+    id: { type: DataTypes.INTEGER, primaryKey: true ,  autoIncrement:true  },
     username: DataTypes.STRING,
     streaming_preference_id: DataTypes.INTEGER,
     preference_value: DataTypes.TEXT,

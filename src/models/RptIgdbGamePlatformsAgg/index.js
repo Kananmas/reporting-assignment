@@ -5,7 +5,7 @@ import db from "../../../connection.js";
 const RptIgdbGamePlatformsAgg = db.define(
   "rpt_igdb_game_platforms_agg",
   {
-    igdb_game_id: { type: DataTypes.INTEGER, primaryKey: true },
+    igdb_game_id: { type: DataTypes.INTEGER, primaryKey: true ,  autoIncrement:true  },
     platform_ids: DataTypes.TEXT,
     platform_count: DataTypes.INTEGER,
     createdBy: DataTypes.STRING,

@@ -51,7 +51,7 @@ export const twitchGameRecomHandler = (app) => {
 
     app.get("/Recommendation/aggregations/count_by_username" , async (req , res) => {
         const result = await RptTwitchGameRecommendationFlat.findAll({
-            attributes:['username' , dbInstance.fn('COUNT' , dbInstance.col("id")) , "count_by_username"],
+            attributes:['username' , [dbInstance.fn('COUNT' , dbInstance.col("id")) , "count_by_username"]],
             group:['username']
         })
 

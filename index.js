@@ -13,6 +13,7 @@ import { userBoostsHandler } from "./src/services/user-boosts.handlers.js";
 import { gameUserUnsavedHandler } from "./src/services/game-user-unsaved.handlers.js";
 import { gamePlatformAggHandler } from "./src/services/game-platforms-agg.handlers.js";
 
+
 const app = express();
 app.use(bodyParser.json());
 

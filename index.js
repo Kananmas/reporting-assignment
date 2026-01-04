@@ -1,5 +1,6 @@
 import bodyParser from "body-parser";
 import express from "express";
+import open from "open";
 
 import { userHandlers } from "./src/services/user.handlers.js";
 import { gameHandler } from "./src/services/game.handlers.js";
@@ -59,10 +60,16 @@ app.use(bodyParser.json());
  gamePlatformAggHandler(app)
 /* ========================================================= */
 
+app.get("/docs", (req, res) => {
+  res.type("html");
+  res.sendFile(process.cwd() + "/docs.html");
+});
+
 app.listen(8081, (e) => {
   if (e) {
     console.log(`error: ${e.message}`);
     return;
   }
   console.log("connected successfully");
+  open("http://localhost:8081/docs")
 });

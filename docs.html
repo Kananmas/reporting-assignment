@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Reporting API – Full Endpoint List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f6f6f6;
+      padding: 20px;
+    }
+    h1 {
+      margin-bottom: 5px;
+    }
+    h2 {
+      margin-top: 30px;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 5px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      margin-top: 10px;
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background: #eee;
+    }
+    .GET { color: green; font-weight: bold; }
+    .POST { color: blue; font-weight: bold; }
+    .PUT { color: orange; font-weight: bold; }
+    .DELETE { color: red; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+<h1>Reporting API</h1>
+<p>Static documentation of all CRUD and aggregation endpoints.</p>
+
+<!-- ======================================================= -->
+
+<h2>IGDB Game</h2>
+<table>
+<tr><th>Method</th><th>Path</th><th>Description</th></tr>
+<tr><td class="GET">GET</td><td>/IGDBGame</td><td>Get all games</td></tr>
+<tr><td class="GET">GET</td><td>/IGDBGame/id?id=</td><td>Get game by ID</td></tr>
+<tr><td class="POST">POST</td><td>/IGDBGame/new</td><td>Create new game</td></tr>
+<tr><td class="PUT">PUT</td><td>/IGDBGame/update</td><td>Update game by ID</td></tr>
+<tr><td class="DELETE">DELETE</td><td>/IGDBGame/remove?id=</td><td>Delete game by ID</td></tr>
+<tr><td class="GET">GET</td><td>/IGDBGame/aggregations/group_by_genre</td><td>Count games grouped by genre</td></tr>
+</table>
+
+<!-- ======================================================= -->
+
+<h2>User</h2>
+<table>
+<tr><th>Method</th><th>Path</th><th>Description</th></tr>
+<tr><td class="GET">GET</td><td>/User</td><td>Get all users</td></tr>
+<tr><td class="GET">GET</td><td>/User/id?username=</td><td>Get user by username</td></tr>
+<tr><td class="POST">POST</td><td>/User/new</td><td>Create new user</td></tr>
+<tr><td class="PUT">PUT</td><td>/User/update</td><td>Update user by username</td></tr>
+<tr><td class="DELETE">DELETE</td><td>/User/remove?username=</td><td>Delete user by username</td></tr>
+<tr><td class="GET">GET</td><td>/User/aggregations/market_alerts</td><td>Count users grouped by market alerts</td></tr>
+</table>
+
+<!-- ======================================================= -->
+
+<h2>User Preferences</h2>
+<table>
+<tr><th>Method</th><th>Path</th><th>Description</th></tr>
+<tr><td class="GET">GET</td><td>/UserPreferences</td><td>Get all user preferences</td></tr>
+<tr><td class="GET">GET</td><td>/UserPreferences/id?id=</td><td>Get preference by ID</td></tr>
+<tr><td class="POST">POST</td><td>/UserPreferences/new</td><td>Create new preference</td></tr>
+<tr><td class="PUT">PUT</td><td>/UserPreferences/update</td><td>Update preference by ID</td></tr>
+<tr><td class="DELETE">DELETE</td><td>/UserPreferences/remove?id=</td><td>Delete preference by ID</td></tr>
+<tr><td class="GET">GET</td><td>/UserPreferences/aggregations/count_by_username</td><td>Count preferences per user</td></tr>
+</table>
+
+<!-- ======================================================= -->
+
+<h2>Streaming Preference</h2>
+<table>
+<tr><th>Method</th><th>Path</th><th>Description</th></tr>
+<tr><td class="GET">GET</td><td>/StreamingPreference</td><td>Get all streaming preferences</td></tr>
+<tr><td class="GET">GET</td><td>/StreamingPreference/id?id=</td><td>Get streaming preference by ID</td></tr>
+<tr><td class="POST">POST</td><td>/StreamingPreference/new</td><td>Create streaming preference</td></tr>
+<tr><td class="PUT">PUT</td><td>/StreamingPreference/update</td><td>Update streaming preference</td></tr>
+<tr><td class="DELETE">DELETE</td><td>/StreamingPreference/remove?id=</td><td>Delete streaming preference</td></tr>
+<tr><td class="GET">GET</td><td>/StreamingPreference/aggregations/count_by_type</td><td>Count streaming preferences by type</td></tr>
+</table>
+
+<!-- ======================================================= -->
+
+<h2>Game Platforms</h2>
+<table>
+<tr><th>Method</th><th>Path</th><th>Description</th></tr>
+<tr><td class="GET">GET</td><td>/GamePlatforms</td><td>Get all game platforms</td></tr>
+<tr><td class="GET">GET</td><td>/GamePlatforms/id?id=</td><td>Get platform by ID</td></tr>
+<tr><td class="POST">POST</td><td>/GamePlatforms/new</td><td>Create game platform</td></tr>
+<tr><td class="PUT">PUT</td><td>/GamePlatforms/update</td><td>Update game platform</td></tr>
+<tr><td class="DELETE">DELETE</td><td>/GamePlatforms/remove?id=</td><td>Delete game platform</td></tr>
+<tr><td class="GET">GET</td><td>/GamePlatforms/aggregation/count_by_gameid</td><td>Count platforms per game</td></tr>
+</table>
+
+<!-- ======================================================= -->
+
+<h2>Feedback</h2>
+<table>
+<tr><th>Method</th><th>Path</th><th>Description</th></tr>
+<tr><td class="GET">GET</td><td>/Feedback</td><td>Get all feedback</td></tr>
+<tr><td class="GET">GET</td><td>/Feedback/id?id=</td><td>Get feedback by ID</td></tr>
+<tr><td class="POST">POST</td><td>/Feedback/new</td><td>Create feedback</td></tr>
+<tr><td class="PUT">PUT</td><td>/Feedback/update</td><td>Update feedback</td></tr>
+<tr><td class="DELETE">DELETE</td><td>/Feedback/remove?id=</td><td>Delete feedback</td></tr>
+<tr><td class="GET">GET</td><td>/Feedback/aggregations/per-game</td><td>Count feedback per game</td></tr>
+</table>
+
+<!-- ======================================================= -->
+
+<h2>Recommendations</h2>
+<table>
+<tr><th>Method</th><th>Path</th><th>Description</th></tr>
+<tr><td class="GET">GET</td><td>/Recommendation</td><td>Get all recommendations</td></tr>
+<tr><td class="GET">GET</td><td>/Recommendation/id?id=</td><td>Get recommendation by ID</td></tr>
+<tr><td class="POST">POST</td><td>/Recommendation/new</td><td>Create recommendation</td></tr>
+<tr><td class="PUT">PUT</td><td>/Recommendation/update</td><td>Update recommendation</td></tr>
+<tr><td class="DELETE">DELETE</td><td>/Recommendation/remove?id=</td><td>Delete recommendation</td></tr>
+<tr><td class="GET">GET</td><td>/Recommendation/aggregations/count_by_type</td><td>Count recommendations by type</td></tr>
+<tr><td class="GET">GET</td><td>/Recommendation/aggregations/count_by_username</td><td>Count recommendations per user</td></tr>
+</table>
+
+<!-- ======================================================= -->
+
+<h2>User Boosts</h2>
+<table>
+<tr><th>Method</th><th>Path</th><th>Description</th></tr>
+<tr><td class="GET">GET</td><td>/Boost</td><td>Get all boosts</td></tr>
+<tr><td class="GET">GET</td><td>/Boost/id?id=</td><td>Get boost by ID</td></tr>
+<tr><td class="POST">POST</td><td>/Boost/new</td><td>Create boost</td></tr>
+<tr><td class="PUT">PUT</td><td>/Boost/update</td><td>Update boost</td></tr>
+<tr><td class="DELETE">DELETE</td><td>/Boost/remove?id=</td><td>Delete boost</td></tr>
+<tr><td class="GET">GET</td><td>/Boost/aggregations/avg-per-type</td><td>Average boost units per type</td></tr>
+</table>
+
+<h2>Game Platforms Agg</h2>
+<table>
+<tr><th>Method</th><th>Path</th><th>Description</th></tr>
+<tr><td class="GET">GET</td><td>/GamePlatformsAgg</td><td>Get all game platform aggregations</td></tr>
+<tr><td class="GET">GET</td><td>/GamePlatformsAgg/id?id=</td><td>Get game platform aggregation by ID</td></tr>
+<tr><td class="POST">POST</td><td>/GamePlatformsAgg/new</td><td>Create game platform aggregation</td></tr>
+<tr><td class="PUT">PUT</td><td>/GamePlatformsAgg/update</td><td>Update game platform aggregation</td></tr>
+<tr><td class="DELETE">DELETE</td><td>/GamePlatformsAgg/remove?id=</td><td>Delete game platform aggregation</td></tr>
+<tr><td class="GET">GET</td><td>/GamePlatformsAgg/aggregations/avg-per-type</td><td>Average game platform aggregation units per type</td></tr>
+</table>
+
+
+<h2>Game User Unsaved</h2>
+<table>
+<tr><th>Method</th><th>Path</th><th>Description</th></tr>
+<tr><td class="GET">GET</td><td>GameUserUnsaved</td><td>Get all unsaved users</td></tr>
+<tr><td class="GET">GET</td><td>GameUserUnsaved/id?id=</td><td>Get unsaved users by ID</td></tr>
+<tr><td class="POST">POST</td><td>GameUserUnsaved/new</td><td>Create unsaved users</td></tr>
+<tr><td class="PUT">PUT</td><td>GameUserUnsaved/update</td><td>Update unsaved users</td></tr>
+<tr><td class="DELETE">DELETE</td><td>GameUserUnsaved/remove?id=</td><td>Delete unsaved users</td></tr>
+<tr><td class="GET">GET</td><td>GameUserUnsaved/aggregations/avg-per-type</td><td>Average unsaved users units per type</td></tr>
+</table>
+
+
+</body>
+</html>

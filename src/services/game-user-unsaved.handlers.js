@@ -2,25 +2,25 @@ import dbInstance from "../../connection.js";
 import RptIgdbGameUserUnsavedFlat from "../models/RptIgdbGameUserUnsavedFlat/index.js";
 
 export const gameUserUnsavedHandler = (app) => {
-    app.get("/GamePlatformsAgg/id", async (req, res) => {
+    app.get("/GameUserUnsaved/id", async (req, res) => {
         const id = req.query.id;
         if (!id) return res.status(400).send("invalid request");
 
         res.json(await RptIgdbGameUserUnsavedFlat.findOne({ where: { id } }));
     });
 
-    app.get("/GamePlatformsAgg", async (req, res) => {
+    app.get("/GameUserUnsaved", async (req, res) => {
         res.json(await RptIgdbGameUserUnsavedFlat.findAll());
     });
 
-    app.post("/GamePlatformsAgg/new", async (req, res) => {
+    app.post("/GameUserUnsaved/new", async (req, res) => {
         if (!req.body) return res.status(400).send("invalid request");
 
         await RptIgdbGameUserUnsavedFlat.create(req.body);
         res.json({ message: "operation successful" });
     });
 
-    app.put("/GamePlatformsAgg/update", async (req, res) => {
+    app.put("/GameUserUnsaved/update", async (req, res) => {
         const id = req.body.id;
         if (!id) return res.status(400).send("invalid request");
 
@@ -31,7 +31,7 @@ export const gameUserUnsavedHandler = (app) => {
         res.json({ message: "operation successful" });
     });
 
-    app.delete("/GamePlatformsAgg/remove", async (req, res) => {
+    app.delete("/GameUserUnsaved/remove", async (req, res) => {
         const id = req.query.id;
         if (!id) return res.status(400).send("invalid request");
 
@@ -40,7 +40,7 @@ export const gameUserUnsavedHandler = (app) => {
     });
 
     //aggregation
-    app.get("/GamePlatformsAgg/aggregation/username", async (req, res) => {
+    app.get("/GameUserUnsaved/aggregation/username", async (req, res) => {
         const result = await RptIgdbGameUserUnsavedFlat.findAll({
             attributes: ["username", [dbInstance.fn("COUNT", dbInstance.col("id")), "count"]],
             group: ["username"]

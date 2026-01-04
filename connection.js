@@ -5,13 +5,20 @@ import { injectEnv } from "./utils/inject-env.js";
 
 injectEnv();
 
-const dbInstance = new Sequelize({
-    dialect: "mysql",
-    password: process.env.DB_USER,
-    username: process.env.DB_PASS,
-    database: "reporting_db",
-    logging:true
-});
+const dbInstance = new Sequelize('reporting_db', process.env.DB_USER, process.env.DB_PASS, {
+  host: 'localhost',
+  dialect: 'mysql',
+  logging: false, // Set to console.log for debugging
+  dialectOptions: {
+    multipleStatements: true
+  },
+  pool: {
+    max: 10,
+    min: 0,
+    acquire: 30000,
+    idle: 10000
+  }
+})
 
 try {
     await dbInstance.authenticate();

@@ -1,4 +1,5 @@
 import dbInstance from "../../connection.js";
+import { sendError } from "../../utils/send-error.js";
 import RptUserBoostsFlat from "../models/RptUserBoostsFlat/index.js";
 
 export const userBoostsHandler = (app) => {
@@ -14,21 +15,29 @@ export const userBoostsHandler = (app) => {
     });
 
     app.post("/Boost/new", async (req, res) => {
-        if (!req.body) return res.status(400).send("invalid request");
+        try {
+            if (!req.body) return res.status(400).send("invalid request");
 
-        await RptUserBoostsFlat.create(req.body);
-        res.json({ message: "operation successful" });
+            const result = await RptUserBoostsFlat.create(req.body);
+            res.json({ message: "operation successful", result });
+        } catch (error) {
+            sendError(res, error);
+        }
     });
 
     app.put("/Boost/update", async (req, res) => {
-        const id = req.body.id;
-        if (!id) return res.status(400).send("invalid request");
+        try {
+            const id = req.body.id;
+            if (!id) return res.status(400).send("invalid request");
 
-        const item = await RptUserBoostsFlat.findOne({ where: { id } });
-        if (!item) return res.status(400).send("invalid request");
+            const item = await RptUserBoostsFlat.findOne({ where: { id } });
+            if (!item) return res.status(400).send("invalid request");
 
-        await item.update(req.body);
-        res.json({ message: "operation successful" });
+            await item.update(req.body);
+            res.json({ message: "operation successful" });
+        } catch (error) {
+            sendError(res , error);
+        }
     });
 
     app.delete("/Boost/remove", async (req, res) => {

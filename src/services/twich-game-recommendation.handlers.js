@@ -1,4 +1,5 @@
 import dbInstance from "../../connection.js";
+import { sendError } from "../../utils/send-error.js";
 import RptTwitchGameRecommendationFlat from "../models/RptTwitchGameRecommendationFlat/index.js";
 
 export const twitchGameRecomHandler = (app) => {
@@ -14,21 +15,29 @@ export const twitchGameRecomHandler = (app) => {
     });
 
     app.post("/Recommendation/new", async (req, res) => {
-        if (!req.body) return res.status(400).send("invalid request");
+        try {
+            if (!req.body) return res.status(400).send("invalid request");
 
-        await RptTwitchGameRecommendationFlat.create(req.body);
-        res.json({ message: "operation successful" });
+            const result = await RptTwitchGameRecommendationFlat.create(req.body);
+            res.json({ message: "operation successful", result });
+        } catch (err) {    // <-- log the actual Sequelize/MySQL error
+            sendError(res , err)
+        }
     });
 
     app.put("/Recommendation/update", async (req, res) => {
-        const id = req.body.id;
-        if (!id) return res.status(400).send("invalid request");
+        try {
+            const id = req.body.id;
+            if (!id) return res.status(400).send("invalid request");
 
-        const item = await RptTwitchGameRecommendationFlat.findOne({ where: { id } });
-        if (!item) return res.status(400).send("invalid request");
+            const item = await RptTwitchGameRecommendationFlat.findOne({ where: { id } });
+            if (!item) return res.status(400).send("invalid request");
 
-        await item.update(req.body);
-        res.json({ message: "operation successful" });
+            await item.update(req.body);
+            res.json({ message: "operation successful" });
+        } catch (error) {
+            sendError(res , error)
+        }
     });
 
     app.delete("/Recommendation/remove", async (req, res) => {
@@ -44,15 +53,15 @@ export const twitchGameRecomHandler = (app) => {
         const result = await RptTwitchGameRecommendationFlat.findAll({
             attributes: ['recommendation_type', [dbInstance.fn("COUNT",
                 dbInstance.col("id")), 'count_by_type']],
-            group:['recommendation_type']
+            group: ['recommendation_type']
         })
         res.json(result)
     })
 
-    app.get("/Recommendation/aggregations/count_by_username" , async (req , res) => {
+    app.get("/Recommendation/aggregations/count_by_username", async (req, res) => {
         const result = await RptTwitchGameRecommendationFlat.findAll({
-            attributes:['username' , [dbInstance.fn('COUNT' , dbInstance.col("id")) , "count_by_username"]],
-            group:['username']
+            attributes: ['username', [dbInstance.fn('COUNT', dbInstance.col("id")), "count_by_username"]],
+            group: ['username']
         })
 
         res.json(result)

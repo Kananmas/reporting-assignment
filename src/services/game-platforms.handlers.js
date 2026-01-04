@@ -1,4 +1,5 @@
 import dbInstance from "../../connection.js";
+import { sendError } from "../../utils/send-error.js";
 import RptIgdbGamePlatforms from "../models/RptIgdbGamePlatforms/index.js";
 
 export const gamePlatformsHandler = (app) => {
@@ -14,21 +15,29 @@ export const gamePlatformsHandler = (app) => {
   });
 
   app.post("/GamePlatforms/new", async (req, res) => {
-    if (!req.body) return res.status(400).send("invalid request");
+    try {
+      if (!req.body) return res.status(400).send("invalid request");
 
-    await RptIgdbGamePlatforms.create(req.body);
-    res.json({ message: "operation successful" });
+      const result = await RptIgdbGamePlatforms.create(req.body);
+      res.json({ message: "operation successful", result });
+    } catch (error) {
+      sendError(res , error)
+    }
   });
 
   app.put("/GamePlatforms/update", async (req, res) => {
-    const id = req.body.id;
-    if (!id) return res.status(400).send("invalid request");
+    try {
+      const id = req.body.id;
+      if (!id) return res.status(400).send("invalid request");
 
-    const item = await RptIgdbGamePlatforms.findOne({ where: { id } });
-    if (!item) return res.status(400).send("invalid request");
+      const item = await RptIgdbGamePlatforms.findOne({ where: { id } });
+      if (!item) return res.status(400).send("invalid request");
 
-    await item.update(req.body);
-    res.json({ message: "operation successful" });
+      await item.update(req.body);
+      res.json({ message: "operation successful" });
+    } catch (error) {
+      sendError(res, error)
+    }
   });
 
   app.delete("/GamePlatforms/remove", async (req, res) => {

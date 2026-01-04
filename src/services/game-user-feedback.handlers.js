@@ -1,4 +1,5 @@
 import dbInstance from "../../connection.js";
+import { sendError } from "../../utils/send-error.js";
 import RptIgdbGameUserFeedbackFlat from "../models/RptIgdbGameUserFeedbackFlat/index.js";
 
 export const userFeedbackHandler = (app) => {
@@ -14,21 +15,29 @@ export const userFeedbackHandler = (app) => {
   });
 
   app.post("/Feedback/new", async (req, res) => {
-    if (!req.body) return res.status(400).send("invalid request");
+    try {
+      if (!req.body) return res.status(400).send("invalid request");
 
-    await RptIgdbGameUserFeedbackFlat.create(req.body);
-    res.json({ message: "operation successful" });
+      const result = await RptIgdbGameUserFeedbackFlat.create(req.body);
+      res.json({ message: "operation successful", result });
+    } catch (error) {
+      sendError(res , error)
+    }
   });
 
   app.put("/Feedback/update", async (req, res) => {
-    const id = req.body.id;
-    if (!id) return res.status(400).send("invalid request");
+    try {
+      const id = req.body.id;
+      if (!id) return res.status(400).send("invalid request");
 
-    const item = await RptIgdbGameUserFeedbackFlat.findOne({ where: { id } });
-    if (!item) return res.status(400).send("invalid request");
+      const item = await RptIgdbGameUserFeedbackFlat.findOne({ where: { id } });
+      if (!item) return res.status(400).send("invalid request");
 
-    await item.update(req.body);
-    res.json({ message: "operation successful" });
+      await item.update(req.body);
+      res.json({ message: "operation successful" });
+    } catch (error) {
+      sendError(res, error);
+    }
   });
 
   app.delete("/Feedback/remove", async (req, res) => {

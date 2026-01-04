@@ -1,4 +1,5 @@
 import dbInstance from "../../connection.js";
+import { sendError } from "../../utils/send-error.js";
 import RptUserPreferencesFlat from "../models/RptUserPreferencesFlat/index.js";
 
 export const userPreferencesHandler = (app) => {
@@ -14,21 +15,29 @@ export const userPreferencesHandler = (app) => {
     });
 
     app.post("/UserPreferences/new", async (req, res) => {
-        if (!req.body) return res.status(400).send("invalid request");
+        try {
+            if (!req.body) return res.status(400).send("invalid request");
 
-        await RptUserPreferencesFlat.create(req.body);
-        res.json({ message: "operation successful" });
+            const result = await RptUserPreferencesFlat.create(req.body);
+            res.json({ message: "operation successful", result });
+        } catch (error) {
+            sendError(res , error)
+        }
     });
 
     app.put("/UserPreferences/update", async (req, res) => {
-        const id = req.body.id;
-        if (!id) return res.status(400).send("invalid request");
+        try {
+            const id = req.body.id;
+            if (!id) return res.status(400).send("invalid request");
 
-        const item = await RptUserPreferencesFlat.findOne({ where: { id } });
-        if (!item) return res.status(400).send("invalid request");
+            const item = await RptUserPreferencesFlat.findOne({ where: { id } });
+            if (!item) return res.status(400).send("invalid request");
 
-        await item.update(req.body);
-        res.json({ message: "operation successful" });
+            await item.update(req.body);
+            res.json({ message: "operation successful" });
+        } catch (error) {
+            sendError(res , error)
+        }
     });
 
     app.delete("/UserPreferences/remove", async (req, res) => {
@@ -41,10 +50,10 @@ export const userPreferencesHandler = (app) => {
 
 
     //aggregations
-    app.get("/UserPreferences/aggregations/count_by_username" , async (req, res) => {
+    app.get("/UserPreferences/aggregations/count_by_username", async (req, res) => {
         const result = await RptUserPreferencesFlat.findAll({
-            attributes:['username' , [dbInstance.fn('COUNT' , dbInstance.col('id')) , 'count_by_username']],
-            group:['username']
+            attributes: ['username', [dbInstance.fn('COUNT', dbInstance.col('id')), 'count_by_username']],
+            group: ['username']
         })
 
         res.json(result);

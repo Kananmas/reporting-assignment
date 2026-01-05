@@ -1,5 +1,5 @@
 import dbInstance from "../../connection.js";
-import { sendError } from "../../utils/send-error.js";
+import { sendError } from "../../utils/send-error.utils.js";
 import RptUserBoostsFlat from "../models/RptUserBoostsFlat/index.js";
 
 export const userBoostsHandler = (app) => {

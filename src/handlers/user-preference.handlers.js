@@ -1,5 +1,5 @@
 import dbInstance from "../../connection.js";
-import { sendError } from "../../utils/send-error.js";
+import { sendError } from "../../utils/send-error.utils.js";
 import RptUserPreferencesFlat from "../models/RptUserPreferencesFlat/index.js";
 
 export const userPreferencesHandler = (app) => {

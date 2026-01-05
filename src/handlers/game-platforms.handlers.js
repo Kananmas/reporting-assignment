@@ -1,5 +1,5 @@
 import dbInstance from "../../connection.js";
-import { sendError } from "../../utils/send-error.js";
+import { sendError } from "../../utils/send-error.utils.js";
 import RptIgdbGamePlatforms from "../models/RptIgdbGamePlatforms/index.js";
 
 export const gamePlatformsHandler = (app) => {

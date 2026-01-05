@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize";
 import { readFileSync } from "fs"
 import populateTables from "./populate-tables.js";
-import { injectEnv } from "./utils/inject-env.js";
+import { injectEnv } from "./utils/inject-env.utils.js";
 
 injectEnv();
 

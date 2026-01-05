@@ -1,6 +1,6 @@
 import { Sequelize, QueryTypes } from "sequelize";
 import {faker} from '@faker-js/faker';
-import { injectEnv } from "./utils/inject-env.js";
+import { injectEnv } from "./utils/inject-env.utils.js";
 
 
 // injecting env before accessing db

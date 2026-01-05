@@ -2,16 +2,16 @@ import bodyParser from "body-parser";
 import express from "express";
 import open from "open";
 
-import { userHandlers } from "./src/services/user.handlers.js";
-import { gameHandler } from "./src/services/game.handlers.js";
-import { streamingPrefHandler } from "./src/services/streaming-preference.js";
-import { userPreferencesHandler } from "./src/services/user-preference.handlers.js";
-import { gamePlatformsHandler } from "./src/services/game-platforms.handlers.js";
-import { userFeedbackHandler } from "./src/services/game-user-feedback.handlers.js";
-import { twitchGameRecomHandler } from "./src/services/twich-game-recommendation.handlers.js";
-import { userBoostsHandler } from "./src/services/user-boosts.handlers.js";
-import { gameUserUnsavedHandler } from "./src/services/game-user-unsaved.handlers.js";
-import { gamePlatformAggHandler } from "./src/services/game-platforms-agg.handlers.js";
+import { userHandlers } from "./src/handlers/user.handlers.js";
+import { gameHandler } from "./src/handlers/game.handlers.js";
+import { streamingPrefHandler } from "./src/handlers/streaming-preference.js";
+import { userPreferencesHandler } from "./src/handlers/user-preference.handlers.js";
+import { gamePlatformsHandler } from "./src/handlers/game-platforms.handlers.js";
+import { userFeedbackHandler } from "./src/handlers/game-user-feedback.handlers.js";
+import { twitchGameRecomHandler } from "./src/handlers/twich-game-recommendation.handlers.js";
+import { userBoostsHandler } from "./src/handlers/user-boosts.handlers.js";
+import { gameUserUnsavedHandler } from "./src/handlers/game-user-unsaved.handlers.js";
+import { gamePlatformAggHandler } from "./src/handlers/game-platforms-agg.handlers.js";
 
 
 const app = express();

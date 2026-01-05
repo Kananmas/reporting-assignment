@@ -1,5 +1,5 @@
 import dbInstance from "../../connection.js";
-import { sendError } from "../../utils/send-error.js";
+import { sendError } from "../../utils/send-error.utils.js";
 import RptStreamingPreference from "../models/RptStreamingPreference/index.js";
 
 export const streamingPrefHandler = (app) => {

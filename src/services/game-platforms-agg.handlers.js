@@ -26,7 +26,7 @@ export const gamePlatformAggHandler = (app) => {
 
     app.put("/GamePlatformsAgg/update", async (req, res) => {
         try {
-            const id = req.body.id;
+            const id = req.body.igdb_game_id;
             if (!id) return res.status(400).send("invalid request");
 
             const item = await RptIgdbGamePlatformsAgg.findOne({ where: { igdb_game_id: id } });
